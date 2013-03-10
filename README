@@ -1,7 +1,14 @@
 ptex2pdf.lua
 ============
 
-ptex2pdf.lua: convert pTeX (and friends) based files to pdf
+Convert Japanese TeX documents to pdf
+
+Author: Norbert Preining <norbert@preining.info>
+
+Main purpose of the script is easy support of Japanese typesetting
+engines in TeXworks. As TeXworks typesetting setup does not allow
+for multistep processing, this script runs one of the ptex based
+programs (ptex, uptex, eptex, platex, uplatex) followed by dvipdfmx.
 
 Usage
 -----
@@ -13,8 +20,8 @@ options: -v  version
          -l  use latex based formats
          -s  stop at dvi
          -i  retain intermediate files
-         -ot '<opts>' extra options for TeX")
-         -od '<opts>' extra options for dvipdfmx")
+         -ot '<opts>' extra options for TeX
+         -od '<opts>' extra options for dvipdfmx
 
 
 Installation
