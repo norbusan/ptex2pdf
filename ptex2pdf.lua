@@ -1,7 +1,7 @@
 #!/usr/bin/env texlua  
 
 NAME = "ptex2pdf[.lua]"
-VERSION = "0.2"
+VERSION = "0.2.1"
 AUTHOR = "Norbert Preining <norbert@preining.info>"
 SHORTDESC = NAME .. ": Convert Japanese TeX documents to pdf"
 LONGDESC = [[
@@ -165,6 +165,10 @@ narg = 1
 repeat
   this_arg = arg[narg]
   if this_arg == "-v" then
+    whoami()
+    os.exit(0)
+  elseif this_arg == "--print-version" then
+    print(VERSION)
     os.exit(0)
   elseif this_arg == "-h" then
     help()
