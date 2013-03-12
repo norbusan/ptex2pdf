@@ -1,62 +1,149 @@
 #!/usr/bin/env texlua  
 
+NAME = "ptex2pdf[.lua]"
 VERSION = "0.2"
+AUTHOR = "Norbert Preining <norbert@preining.info>"
+SHORTDESC = NAME .. ": Convert Japanese TeX documents to pdf"
+LONGDESC = [[
+Main purpose of the script is easy support of Japanese typesetting
+engines in TeXworks. As TeXworks typesetting setup does not allow
+for multistep processing, this script runs one of the ptex based
+programs (ptex, uptex, eptex, platex, uplatex) followed by dvipdfmx.
+]]
+USAGE = [[
+Usage:  [texlua] ptex2pdf[.lua] { option | basename[.tex] } ... 
+options: -v  version
+         -h  help
+         --help print full help (installation, TeXworks setup)
+         -e  use eptex class of programs
+         -u  use uptex class of programs
+         -l  use latex based formats
+         -s  stop at dvi
+         -i  retain intermediate files
+         -ot '<opts>' extra options for TeX
+         -od '<opts>' extra options for dvipdfmx
+]]
 
---[[
-     ptex2pdf.lua: convert pTeX (and friends) based files to pdf
+LICENSECOPYRIGHT = [[
+Originally based on musixtex.lua from Bob Tennent.
 
-     Originally based on musixtex.lua from Bob Tennent.
+(c) Copyright 2012 Bob Tennent rdt@cs.queensu.ca
+(c) Copyright 2013 Norbert Preining norbert@preining.info
 
-     (c) Copyright 2012 Bob Tennent rdt@cs.queensu.ca
-     (c) Copyright 2013 Norbert Preining norbert@preining.info
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
 
-     This program is free software; you can redistribute it and/or modify it
-     under the terms of the GNU General Public License as published by the
-     Free Software Foundation; either version 2 of the License, or (at your
-     option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.
 
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-     Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+]]
 
-     You should have received a copy of the GNU General Public License along
-     with this program; if not, write to the Free Software Foundation, Inc.,
-     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+INSTALLATION = [[
+Copy the file ptex2pdf.lua into a directory where scripts are found,
+that is for example
+  TLROOT/texmf-dist/scripts/ptex2pdf/
+(where TLROOT is for example the root of your TeX Live installation)
 
---]]
+Unix:
+create a link in one of the bin dirs to the above file, in the
+TeX Live case:
+  TLROOT/bin/ARCH/ptex2pdf -> ../../texmf-dist/scripts/ptex2pdf/ptex2pdf.lua
 
---[[
+Windows:
+create a copy of runscript.exe as ptex2pdf.exe, in the TeX Live case:
+  copy TLROOT/bin/win32/runscript.exe TLROOT/bin/win32/ptex2pdf.exe
+]]
+TEXWORKS = [[
+Under Preferences > Typesetting add new entries, for example:
 
-  ChangeLog:
+for ptex files:
+  Name:         pTeX to pdf
+  Program:      ptex2pdf
+  Arguments:    -ot
+                $synctexoption
+                $fullname
 
+for platex files:
+  Name:         pLaTeX to pdf
+  Program:      ptex2pdf
+  Arguments:    -l
+                -ot
+                $synctexoption
+                $fullname
+
+for uptex files:
+  Name:         upTeX to pdf
+  Program:      ptex2pdf
+  Arguments:    -u
+                -ot
+                $synctexoption
+                $fullname
+
+for uplatex files:
+  Name:         upLaTeX to pdf
+  Program:      ptex2pdf
+  Arguments:    -l
+                -u
+                -ot
+                $synctexoption
+                $fullname
+]]
+DEVELPLACE = "https://git.gitorious.org/tlptexlive/ptex2pdf.git"
+
+
+CHANGELOG = [[
      version 0.1  2013-03-08 NP
        Initial release on blog
      version 0.2  2013-03-10 NP
        import into git repository
        support passing options on to tex and dvipdfm
        add README with TeXworks config options
+     version 0.3dev  2013-MM-DD NP
+       include the readme in the lua code
+]]
 
---]]
 
 function usage()
-  print("Usage:  [texlua] ptex2pdf[.lua] { option | basename[.tex] } ... ")
-  print("options: -v  version")
-  print("         -h  help")
-  print("         -e  use eptex class of programs")
-  print("         -u  use uptex class of programs")
-  print("         -l  use latex based formats")
-  print("         -s  stop at dvi")
-  print("         -i  retain intermediate files")
-  print("         -ot '<opts>' extra options for TeX")
-  print("         -od '<opts>' extra options for dvipdfmx")
+  print(USAGE)
+end
+
+function help()
+  print(SHORTDESC)
+  print()
+  print("Author: " .. AUTHOR)
+  print()
+  print(LONGDESC)
+  print(USAGE)
+end
+
+function fullhelp()
+  help()
+  print("Installation")
+  print("------------")
+  print(INSTALLATION)
+  print("TeXworks setup")
+  print("--------------")
+  print(TEXWORKS)
+  print("Development place")
+  print("-----------------")
+  print(DEVELPLACE)
+  print()
+  print("Copyright and License")
+  print("---------------------")
+  print(LICENSECOPYRIGHT)
 end
 
 function whoami ()
-  print("This is ptex2pdf.lua version ".. VERSION .. ".")
+  print("This is " .. NAME .. " version ".. VERSION .. ".")
 end
 
-whoami()
 if #arg == 0 then
   usage()
   os.exit(0)
@@ -80,7 +167,10 @@ repeat
   if this_arg == "-v" then
     os.exit(0)
   elseif this_arg == "-h" then
-    usage()
+    help()
+    os.exit(0)
+  elseif this_arg == "--help" then
+    fullhelp()
     os.exit(0)
   elseif this_arg == "-e" then
     use_eptex = 1
@@ -103,6 +193,8 @@ repeat
   end --if this_arg == ...
   narg = narg+1
 until narg > #arg 
+
+whoami()
 
 if use_eptex == 1 then
   if use_uptex == 1 then
@@ -164,6 +256,8 @@ else
 end --if not io.open ...
 
 os.exit( exit_code )
+
+
 
 -- Local Variables:
 -- lua-indent-level: 2
