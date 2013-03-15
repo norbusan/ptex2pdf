@@ -203,9 +203,9 @@ whoami()
 if use_eptex == 1 then
   if use_uptex == 1 then
     if use_latex == 1 then
-      tex = "uplatex"	-- uptex already as etex extension
+      tex = "uplatex"	-- uplatex already as etex extension
     else
-      tex = "uptex"
+      tex = "euptex"
     end
   else
     if use_latex == 1 then
