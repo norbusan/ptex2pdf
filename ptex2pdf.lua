@@ -1,7 +1,7 @@
 #!/usr/bin/env texlua  
 
 NAME = "ptex2pdf[.lua]"
-VERSION = "0.2.1"
+VERSION = "0.3"
 AUTHOR = "Norbert Preining <norbert@preining.info>"
 SHORTDESC = NAME .. ": Convert Japanese TeX documents to pdf"
 LONGDESC = [[
@@ -105,8 +105,9 @@ CHANGELOG = [[
        import into git repository
        support passing options on to tex and dvipdfm
        add README with TeXworks config options
-     version 0.3dev  2013-MM-DD NP
+     version 0.3  2013-05-01 NP
        include the readme in the lua code
+       fix program name for -e -u
 ]]
 
 
