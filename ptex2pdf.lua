@@ -1,7 +1,7 @@
 #!/usr/bin/env texlua  
 
 NAME = "ptex2pdf[.lua]"
-VERSION = "0.4"
+VERSION = "0.5"
 AUTHOR = "Norbert Preining <norbert@preining.info>"
 SHORTDESC = NAME .. ": Convert Japanese TeX documents to pdf"
 LONGDESC = [[
@@ -28,7 +28,7 @@ LICENSECOPYRIGHT = [[
 Originally based on musixtex.lua from Bob Tennent.
 
 (c) Copyright 2012 Bob Tennent rdt@cs.queensu.ca
-(c) Copyright 2013 Norbert Preining norbert@preining.info
+(c) Copyright 2013-2014 Norbert Preining norbert@preining.info
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -122,6 +122,9 @@ CHANGELOG = [[
      version 0.4  2013-05-07 NP
        quote the filename with ", so that special chars do survive
        add an example for TeXworks for files with different kanji encoding
+     version 0.5  2014-11-05 NP
+       on Windows: set command_line_encoding to utf8 when running uptex
+       (patch by Akira Kakuto)
 ]]
 
 
@@ -252,6 +255,12 @@ if not io.open(filename .. ".tex", "r") then
   print("Non-existent file: ", filename .. ".tex")
   exit_code = 1
 else
+  -- make sure that on Windows/uptex we are using utf8 as command line encoding
+  if use_uptex == 1 then
+    if os.type == 'windows' then
+      os.setenv('command_line_encoding', 'utf8')
+    end
+  end
   print("Processing ".. filename .. ".tex.")
   if (os.execute(tex .. " " .. texopts .. " \"" .. filename .. "\"") == 0) and
      (dvipdf == "" or  (os.execute(dvipdf .. " " .. dvipdfopts .. " \"" .. filename .. "\"") == 0))
