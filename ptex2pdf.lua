@@ -1,7 +1,7 @@
-#!/usr/bin/env texlua  
+#!/usr/bin/env texlua
 
 NAME = "ptex2pdf[.lua]"
-VERSION = "0.5"
+VERSION = "0.6"
 AUTHOR = "Norbert Preining <norbert@preining.info>"
 SHORTDESC = NAME .. ": Convert Japanese TeX documents to pdf"
 LONGDESC = [[
@@ -28,7 +28,7 @@ LICENSECOPYRIGHT = [[
 Originally based on musixtex.lua from Bob Tennent.
 
 (c) Copyright 2012 Bob Tennent rdt@cs.queensu.ca
-(c) Copyright 2013-2014 Norbert Preining norbert@preining.info
+(c) Copyright 2013-2015 Norbert Preining norbert@preining.info
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -125,6 +125,10 @@ CHANGELOG = [[
      version 0.5  2014-11-05 NP
        on Windows: set command_line_encoding to utf8 when running uptex
        (patch by Akira Kakuto)
+     version 0.6  2015-03-08 NP
+       cygwin didn't like the (accidentally inserted) spaces after the
+       texlua in the shebang line, and stopped working with
+         "no such program: "texlua  " ..."
 ]]
 
 
