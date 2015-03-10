@@ -47,7 +47,7 @@ Under Preferences > Typesetting add new entries, for example:
 
 for ptex files:
 
-  ptex        |
+  Setting     |  Value
 ----------------------------
   Name:       |  pTeX to pdf
   Program:    |  ptex2pdf
@@ -58,7 +58,7 @@ for ptex files:
 
 for platex files:
 
-  platex      |
+  Setting     | Value
 -----------------------------
   Name:       | pLaTeX to pdf
   Program:    | ptex2pdf
@@ -69,7 +69,7 @@ for platex files:
 
 for uptex files:
 
-  uptex       |
+  Setting     | Value
 -----------------------------
   Name:       | upTeX to pdf
   Program:    | ptex2pdf
@@ -80,7 +80,7 @@ for uptex files:
 
 for uplatex files:
 
-  uplatex     |
+  Setting     | Value
 -----------------------------
   Name:       | upLaTeX to pdf
   Program:    | ptex2pdf
@@ -95,7 +95,7 @@ add the respective `-kanji` option after the `$synctexoption`. Example:
 
 for platex files in SJIS encoding:
 
-  platex/SJIS |
+  Setting     | Value
 ---------------------------
   Name:       | pLaTeX/SJIS to pdf
   Program:    | ptex2pdf
