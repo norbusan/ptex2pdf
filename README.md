@@ -1,8 +1,8 @@
 # ptex2pdf #
 
-**Author:** Norbert Preining <norbert@preining.info>
-**Website:** http://www.preining.info/blog/software-projects/ptex2pdf/ (in Japanese)
-**License:** GPLv2
+**Author:** Norbert Preining <norbert@preining.info>  
+**Website:** http://www.preining.info/blog/software-projects/ptex2pdf/ (in Japanese)  
+**License:** GPLv2  
 
 Convert Japanese TeX documents to pdf
 
@@ -33,17 +33,21 @@ options: -v  version
 
 Copy the file ptex2pdf.lua into a directory where scripts are found,
 that is for example
-  TLROOT/texmf-dist/scripts/ptex2pdf/
-(where TLROOT is for example the root of your TeX Live installation)
 
-Unix:
+  `TLROOT/texmf-dist/scripts/ptex2pdf/`
+
+(where `TLROOT` is for example the root of your TeX Live installation)
+
+### Unix ###
 create a link in one of the bin dirs to the above file, in the
 TeX Live case:
-  TLROOT/bin/ARCH/ptex2pdf -> ../../texmf-dist/scripts/ptex2pdf/ptex2pdf.lua
 
-Windows:
+  `TLROOT/bin/ARCH/ptex2pdf -> ../../texmf-dist/scripts/ptex2pdf/ptex2pdf.lua`
+
+### Windows ###
 create a copy of runscript.exe as ptex2pdf.exe, in the TeX Live case:
-  copy TLROOT/bin/win32/runscript.exe TLROOT/bin/win32/ptex2pdf.exe
+
+  `copy TLROOT/bin/win32/runscript.exe TLROOT/bin/win32/ptex2pdf.exe`
 
 ## TeXworks setup ##
 
@@ -117,8 +121,8 @@ http://github.com/norbusan/ptex2pdf
 
 Originally based on musixtex.lua from Bob Tennent.
 
-(c) Copyright 2012 Bob Tennent rdt@cs.queensu.ca
-(c) Copyright 2013-2015 Norbert Preining norbert@preining.info
+(c) Copyright 2012 Bob Tennent rdt@cs.queensu.ca  
+(c) Copyright 2013-2015 Norbert Preining norbert@preining.info  
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
