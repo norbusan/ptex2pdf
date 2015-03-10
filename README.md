@@ -1,6 +1,8 @@
 # ptex2pdf #
 
 **Author:** Norbert Preining <norbert@preining.info>
+**Website:** http://www.preining.info/blog/software-projects/ptex2pdf/ (in Japanese)
+**License:** GPLv2
 
 Convert Japanese TeX documents to pdf
 
@@ -50,7 +52,7 @@ Under Preferences > Typesetting add new entries, for example:
 for ptex files:
 
 | Setting     |  Value           |
-----------------------------------
+|-------------|------------------|
 | Name:       |  pTeX to pdf     |
 | Program:    |  ptex2pdf        |
 | Arguments:  |  -ot             |
@@ -61,7 +63,7 @@ for ptex files:
 for platex files:
 
 | Setting     | Value          |
---------------------------------
+|-------------|----------------|
 | Name:       | pLaTeX to pdf  |
 | Program:    | ptex2pdf       |
 | Arguments:  | -l             |
@@ -72,7 +74,7 @@ for platex files:
 for uptex files:
 
 | Setting     | Value          |
--------------------------------|
+|-------------|----------------|
 | Name:       | upTeX to pdf   |
 | Program:    | ptex2pdf       |
 | Arguments:  | -u             |
@@ -83,7 +85,7 @@ for uptex files:
 for uplatex files:
 
 | Setting     | Value          |
---------------------------------
+|-------------|----------------|
 | Name:       | upLaTeX to pdf |
 | Program:    | ptex2pdf       |
 | Arguments:  | -l             |
@@ -98,7 +100,7 @@ add the respective `-kanji` option after the `$synctexoption`. Example:
 for platex files in SJIS encoding:
 
 | Setting     | Value                       |
----------------------------------------------
+|-------------|-----------------------------|
 | Name:       | pLaTeX/SJIS to pdf          |
 | Program:    | ptex2pdf                    |
 | Arguments:  | -l                          |
