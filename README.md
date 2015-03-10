@@ -1,8 +1,8 @@
-# ptex2pdf #
+# ptex2pdf[.lua] #
 
-**Author:** Norbert Preining <norbert@preining.info>  
+**Author:** Norbert Preining  
 **Website:** http://www.preining.info/blog/software-projects/ptex2pdf/ (in Japanese)  
-**License:** GPLv2  
+**License:** GPLv2
 
 Convert Japanese TeX documents to pdf
 
@@ -39,6 +39,7 @@ that is for example
 (where `TLROOT` is for example the root of your TeX Live installation)
 
 ### Unix ###
+
 create a link in one of the bin dirs to the above file, in the
 TeX Live case:
 
@@ -116,6 +117,31 @@ for platex files in SJIS encoding:
 ## Development place ##
 
 http://github.com/norbusan/ptex2pdf
+
+## Changelog ##
+
+- version 0.1  2013-03-08 NP
+  Initial release on blog
+- version 0.2  2013-03-10 NP
+  import into git repository
+  support passing options on to tex and dvipdfm
+  add README with TeXworks config options
+- version 0.3  2013-05-01 NP
+  include the readme in the lua code
+  fix program name for -e -u
+- version 0.4  2013-05-07 NP
+  quote the filename with ", so that special chars do survive
+  add an example for TeXworks for files with different kanji encoding
+- version 0.5  2014-11-05 NP
+  on Windows: set command_line_encoding to utf8 when running uptex
+  (patch by Akira Kakuto)
+- version 0.6  2015-03-08 NP
+  cygwin didn't like the (accidentally inserted) spaces after the
+  texlua in the shebang line, and stopped working with
+    "no such program: "texlua  " ..."
+- version 0.7dev 2015-XX-XX
+  move to github as gitorious will be closed, adapt help output
+  to generate github flavored markdown
 
 ## Copyright and License ##
 
