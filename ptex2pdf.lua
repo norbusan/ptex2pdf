@@ -21,7 +21,7 @@ options: -v  version
          -l  use latex based formats
          -s  stop at dvi
          -i  retain intermediate files
-         -ce-utf8 sets command_line_encoding to utf8 on Windows
+         -ce 'str' sets command_line_encoding to str on Windows
          -ot '<opts>' extra options for TeX
          -od '<opts>' extra options for dvipdfmx]]
 
@@ -156,7 +156,7 @@ CHANGELOG = [[
 - version 0.7dev 2015-XX-XX
   move to github as gitorious will be closed, adapt help output
     to generate github flavored markdown
-  do not forcefully set command_line_encoding, but add option -ce-utf8
+  do not forcefully set command_line_encoding, but add option -ce
 ]]
 
 
@@ -242,11 +242,11 @@ texopts = ""
 dvipdf = "dvipdfmx"
 dvipdfopts = ""
 intermediate = 1
+cmdenc = ""
 
 use_eptex = 0
 use_uptex = 0
 use_latex = 0
-set_enc   = 0
 filename = ""
 exit_code = 0
 narg = 1
@@ -283,8 +283,9 @@ repeat
   elseif this_arg == "-od" then
     narg = narg+1
     dvipdfopts = arg[narg]
-  elseif this_arg == "-ce-utf8" then
-    set_enc = 1
+  elseif this_arg == "-ce" then
+    narg = narg+1
+    cmdenc = arg[narg]
   else
     filename = this_arg 
   end --if this_arg == ...
@@ -335,11 +336,11 @@ else
   -- before we had: if uptex && windows => set to utf8
   -- but this creates problems with synctex generated files
   -- see http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1528
-  if set_enc == 1  then
+  if cmdenc ~= "" then
     if os.type == 'windows' then
-      os.setenv('command_line_encoding', 'utf8')
+      os.setenv('command_line_encoding', cmdenc)
     else
-      print("Warning: -ce-utf8 not supported on non-Windows systems!")
+      print("Warning: -ce not supported on non-Windows systems!")
     end
   end
   print("Processing ".. filename .. ".tex.")
