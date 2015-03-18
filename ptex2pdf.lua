@@ -21,7 +21,6 @@ options: -v  version
          -l  use latex based formats
          -s  stop at dvi
          -i  retain intermediate files
-         -ce 'str' sets command_line_encoding to str on Windows
          -ot '<opts>' extra options for TeX
          -od '<opts>' extra options for dvipdfmx]]
 
@@ -155,8 +154,7 @@ CHANGELOG = [[
     "no such program: "texlua  " ..."
 - version 0.7dev 2015-XX-XX
   move to github as gitorious will be closed, adapt help output
-    to generate github flavored markdown
-  do not forcefully set command_line_encoding, but add option -ce
+  to generate github flavored markdown
 ]]
 
 
@@ -242,7 +240,6 @@ texopts = ""
 dvipdf = "dvipdfmx"
 dvipdfopts = ""
 intermediate = 1
-cmdenc = ""
 
 use_eptex = 0
 use_uptex = 0
@@ -283,9 +280,6 @@ repeat
   elseif this_arg == "-od" then
     narg = narg+1
     dvipdfopts = arg[narg]
-  elseif this_arg == "-ce" then
-    narg = narg+1
-    cmdenc = arg[narg]
   else
     filename = this_arg 
   end --if this_arg == ...
@@ -331,16 +325,10 @@ if not io.open(filename .. ".tex", "r") then
   print("Non-existent file: ", filename .. ".tex")
   exit_code = 1
 else
-  -- set command_line_encoding on windows
-  -- this allows setting up uptex etc to use utf8
-  -- before we had: if uptex && windows => set to utf8
-  -- but this creates problems with synctex generated files
-  -- see http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1528
-  if cmdenc ~= "" then
+  -- make sure that on Windows/uptex we are using utf8 as command line encoding
+  if use_uptex == 1 then
     if os.type == 'windows' then
-      os.setenv('command_line_encoding', cmdenc)
-    else
-      print("Warning: -ce not supported on non-Windows systems!")
+      os.setenv('command_line_encoding', 'utf8')
     end
   end
   print("Processing ".. filename .. ".tex.")
