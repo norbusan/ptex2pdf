@@ -1,7 +1,7 @@
 #!/usr/bin/env texlua
 
 NAME = "ptex2pdf[.lua]"
-VERSION = "0.7dev"
+VERSION = "0.7"
 AUTHOR = "Norbert Preining"
 AUTHOREMAIL = "norbert@preining.info"
 SHORTDESC = "Convert Japanese TeX documents to pdf"
@@ -155,6 +155,8 @@ CHANGELOG = [[
 - version 0.7dev 2015-XX-XX
   move to github as gitorious will be closed, adapt help output
   to generate github flavored markdown
+  check for files using kpathsea instead of opening directly, to allow
+  for input of files found by kpathsea (closes github issue 1)
 ]]
 
 
@@ -318,12 +320,19 @@ else
   end
 end
 
+-- initialize kpse
+kpse.set_program_name(tex)
+
 if filename ~= "" and string.sub(filename, -4, -1) == ".tex" then
   filename = string.sub(filename, 1, -5)
 end
-if not io.open(filename .. ".tex", "r") then
-  print("Non-existent file: ", filename .. ".tex")
-  exit_code = 1
+
+-- if not io.open(filename .. ".tex", "r") then
+--   print("Non-existent file: ", filename .. ".tex")
+--   exit_code = 1
+if ( kpse.find_file(filename .. ".tex") == nil ) then
+   print("File cannot be found with kpathsea: ", filename .. ".tex")
+   exit_code = 1
 else
   -- make sure that on Windows/uptex we are using utf8 as command line encoding
   if use_uptex == 1 then
