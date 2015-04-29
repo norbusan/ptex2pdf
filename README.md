@@ -142,6 +142,8 @@ http://github.com/norbusan/ptex2pdf
 - version 0.7dev 2015-XX-XX
   move to github as gitorious will be closed, adapt help output
   to generate github flavored markdown
+  check for files using kpathsea instead of opening directly, to allow
+  for input of files found by kpathsea (closes github issue 1)
 
 ## Copyright and License ##
 
