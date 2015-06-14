@@ -144,6 +144,8 @@ http://github.com/norbusan/ptex2pdf
   to generate github flavored markdown
   check for files using kpathsea instead of opening directly, to allow
   for input of files found by kpathsea (closes github issue 1)
+  file name checks: first search for arg as is, then try .tex and .ltx
+  (closes github issue: 3)
 
 ## Copyright and License ##
 
