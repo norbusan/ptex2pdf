@@ -152,7 +152,7 @@ CHANGELOG = [[
   cygwin didn't like the (accidentally inserted) spaces after the
   texlua in the shebang line, and stopped working with
     "no such program: "texlua  " ..."
-- version 0.7dev 2015-XX-XX
+- version 0.7 2015-06-15
   move to github as gitorious will be closed, adapt help output
   to generate github flavored markdown
   check for files using kpathsea instead of opening directly, to allow
@@ -339,7 +339,7 @@ else
     if ( kpse.find_file(filename .. ".tex") == nil ) then
       -- last try .ltx
       if ( kpse.find_file(filename .. ".ltx") == nil ) then
-        print("File cannot be found with kpathsea: ", filename .. "(.tex, .ltx)")
+        print("File cannot be found with kpathsea: ", filename .. "[.tex, .ltx]")
         os.exit(1)
       else
         bname = filename
