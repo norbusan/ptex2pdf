@@ -139,11 +139,12 @@ http://github.com/norbusan/ptex2pdf
   cygwin didn't like the (accidentally inserted) spaces after the
   texlua in the shebang line, and stopped working with
     "no such program: "texlua  " ..."
-- version 0.7dev 2015-XX-XX
+- version 0.7 2015-04-29
   move to github as gitorious will be closed, adapt help output
   to generate github flavored markdown
   check for files using kpathsea instead of opening directly, to allow
   for input of files found by kpathsea (closes github issue 1)
+- version 0.8 2015-06-15
   file name checks: first search for arg as is, then try .tex and .ltx
   (closes github issue: 3)
 
